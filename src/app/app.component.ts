@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { MatIconRegistry } from "@angular/material";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'angularFlex';
+  title = "angularFlex";
+
+  links = ["First", "Second", "Third"];
+  activeLink = this.links[0];
+  background = "";
+
+  toggleBackground() {
+    this.background = this.background ? "" : "primary";
+  }
 }
