@@ -37,6 +37,9 @@ export class AppComponent {
     console.log(this.config);
     console.log(this.sellers);
   }
+  onClickMe3() {
+    this.getValuesService.postSeller().subscribe(hero => console.log(hero));
+  }
 
   toggleBackground() {
     this.background = this.background ? "" : "primary";
