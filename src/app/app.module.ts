@@ -9,6 +9,7 @@ import {
   MatIconModule
 } from "@angular/material";
 import { MatTabsModule } from "@angular/material/tabs";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { MatTabsModule } from "@angular/material/tabs";
     MatButtonModule,
     MatCheckboxModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
