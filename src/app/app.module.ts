@@ -4,15 +4,30 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
-  MatButtonModule,
   MatCheckboxModule,
-  MatIconModule
+  MatMenuModule,
+  MatButtonModule,
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatListModule,
+  MatToolbarModule,
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
+  MatSelectModule,
+  MatDatepickerModule
 } from "@angular/material";
 import { MatTabsModule } from "@angular/material/tabs";
 import { HttpClientModule } from "@angular/common/http";
+import { AddDialogComponent } from "./addDialog/add-dialog/add-dialog.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AddDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,9 +35,24 @@ import { HttpClientModule } from "@angular/common/http";
     MatCheckboxModule,
     MatTabsModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatMenuModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddDialogComponent]
 })
 export class AppModule {}

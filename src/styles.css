@@ -117,3 +117,9 @@ html {
   margin-left: auto;
   margin-top: 7px;
 }
+
+.my-panel .mat-dialog-container {
+  overflow: hidden;
+  border-radius: 5px;
+  padding: 5px;
+}
