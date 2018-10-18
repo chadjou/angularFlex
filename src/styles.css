@@ -123,3 +123,7 @@ html {
   border-radius: 5px;
   padding: 5px;
 }
+
+.pointer {
+  cursor: pointer;
+}

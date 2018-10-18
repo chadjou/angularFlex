@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { stringify } from "querystring";
 
 @Component({
   selector: "app-add-dialog",
@@ -10,6 +11,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 export class AddDialogComponent implements OnInit {
   form: FormGroup;
   description: string;
+  nameString: string = "test";
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddDialogComponent>,
@@ -18,6 +20,7 @@ export class AddDialogComponent implements OnInit {
     this.description = description;
 
     this.form = fb.group({
+      name: [this.nameString],
       description: [description, Validators.required],
       category: [category, Validators.required],
       longDescription: [longDescription, Validators.required]

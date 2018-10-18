@@ -12,6 +12,7 @@ import { AddDialogComponent } from "./addDialog/add-dialog/add-dialog.component"
 export class AppComponent {
   config: string[];
   sellers: any;
+  ss: any;
   constructor(
     private getValuesService: GetValuesService,
     private dialog: MatDialog
@@ -37,9 +38,15 @@ export class AppComponent {
 
     const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
 
-    dialogRef
-      .afterClosed()
-      .subscribe(val => console.log("Dialog output:", val));
+    dialogRef.afterClosed().subscribe(val => {
+      console.log("Dialog output:", val);
+      this.ss = {};
+      this.ss.name = val.name;
+      console.log(this.ss);
+      this.getValuesService
+        .postSeller2(this.ss)
+        .subscribe(hero => console.log(hero));
+    });
   }
 
   showConfig_v1() {
@@ -67,6 +74,9 @@ export class AppComponent {
     this.getValuesService.postSeller().subscribe(hero => console.log(hero));
   }
 
+  onClickMe4() {
+    console.log("CLICK!");
+  }
   toggleBackground() {
     this.background = this.background ? "" : "primary";
   }
