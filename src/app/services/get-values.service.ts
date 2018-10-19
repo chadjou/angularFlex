@@ -11,6 +11,7 @@ export class GetValuesService {
   sellersUrl = "https://localhost:44358/api/Sellers";
   postSellerUrl = "https://localhost:44358/api/seller";
   deleteSellerUrl = "https://localhost:44358/api/deleteseller2";
+  updateSellerUrl = "https://localhost:44358/api/updateseller2";
 
   testbody = { name: "test2" };
 
@@ -30,7 +31,10 @@ export class GetValuesService {
   }
 
   deleteSeller(id: any): Observable<Object> {
-    let testname = { id: id };
     return this.http.request("delete", this.deleteSellerUrl, { body: id });
+  }
+
+  updateHero(qq: any): Observable<Object> {
+    return this.http.put(this.updateSellerUrl, qq);
   }
 }
