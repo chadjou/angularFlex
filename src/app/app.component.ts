@@ -74,6 +74,10 @@ export class AppComponent {
     this.getValuesService.postSeller().subscribe(hero => console.log(hero));
   }
 
+  deleteSeller(id: any) {
+    this.getValuesService.deleteSeller(id).subscribe(hero => console.log(hero));
+  }
+
   onClickMe4() {
     console.log("CLICK!");
   }
