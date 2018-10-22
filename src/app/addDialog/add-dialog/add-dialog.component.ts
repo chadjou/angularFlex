@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { stringify } from "querystring";
+import { Seller } from "../../models/seller";
+import { Terminal } from "../../models/terminal";
 
 @Component({
   selector: "app-add-dialog",
@@ -10,20 +12,22 @@ import { stringify } from "querystring";
 })
 export class AddDialogComponent implements OnInit {
   form: FormGroup;
-  description: string;
-  nameString: string = "test";
+  hasOwnerField: boolean;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) { description, longDescription, category }
+    @Inject(MAT_DIALOG_DATA) { entity }
   ) {
-    this.description = description;
+    if (entity.hasOwnProperty("sellerId")) {
+      this.hasOwnerField = true;
+    } else {
+      this.hasOwnerField = false;
+    }
 
     this.form = fb.group({
-      name: [this.nameString],
-      description: [description, Validators.required],
-      category: [category, Validators.required],
-      longDescription: [longDescription, Validators.required]
+      name: [entity.name],
+      address: [entity.address],
+      ownerId: [entity.SellerId]
     });
   }
 

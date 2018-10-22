@@ -3,6 +3,9 @@ import { GetValuesService } from "./services/get-values.service";
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { AddDialogComponent } from "./addDialog/add-dialog/add-dialog.component";
+import { Seller } from "./models/seller";
+
+import { Terminal } from "./models/terminal";
 
 @Component({
   selector: "app-root",
@@ -18,34 +21,51 @@ export class AppComponent {
     private dialog: MatDialog
   ) {}
   title = "angularFlex";
-  testObject = { description: "desc", longDescription: "qq", category: "qq2" };
 
   links = ["First", "Second", "Third"];
   activeLink = this.links[0];
   background = "";
 
-  editCourse({ description, longDescription, category }) {
+  testEntity = {
+    id: 0,
+    name: "testName",
+    address: "testAddress"
+    //sellerId: null
+  };
+
+  editCourse(entity: Seller | Terminal) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    /*
+    var entity: Seller = {
+      id: 0,
+      name: "testName",
+      address: "testAddress"
+      //sellerId: null
+    };
+    */
 
     dialogConfig.data = {
-      description,
-      longDescription,
-      category
+      entity
     };
 
     const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(val => {
       console.log("Dialog output:", val);
-      this.ss = {};
-      this.ss.name = val.name;
+      this.ss = val;
       console.log(this.ss);
-      this.getValuesService
-        .postSeller2(this.ss)
-        .subscribe(hero => console.log(hero));
+      if (!name) {
+        this.getValuesService
+          .postSeller2(val)
+          .subscribe(data => console.log(data));
+      } else {
+        this.getValuesService
+          .updateSeller(val)
+          .subscribe(data => console.log(data));
+      }
     });
   }
 

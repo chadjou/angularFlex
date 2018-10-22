@@ -34,7 +34,7 @@ export class GetValuesService {
     return this.http.request("delete", this.deleteSellerUrl, { body: id });
   }
 
-  updateHero(qq: any): Observable<Object> {
+  updateSeller(qq: any): Observable<Object> {
     return this.http.put(this.updateSellerUrl, qq);
   }
 }
