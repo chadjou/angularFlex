@@ -7,6 +7,11 @@ import { Seller } from "./models/seller";
 
 import { Terminal } from "./models/terminal";
 
+enum entityTypeEnum {
+  Seller,
+  Terminal
+}
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -26,6 +31,9 @@ export class AppComponent {
   activeLink = this.links[0];
   background = "";
 
+  newSeller: Seller;
+  newTerminal: Terminal;
+
   testEntity = {
     id: 0,
     name: "testName",
@@ -33,21 +41,32 @@ export class AppComponent {
     //sellerId: null
   };
 
-  editCourse(entity: Seller | Terminal) {
+  //entity?: Seller | Terminal,
+  editCourse(entity?: any, ownerId?: number) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    /*
-    var entity: Seller = {
-      id: 0,
-      name: "testName",
-      address: "testAddress"
-      //sellerId: null
-    };
-    */
+    var isNew = false;
+
+    if (!entity) {
+      isNew = true;
+    }
+
+    if (isNew) {
+      entity = {
+        id: null,
+        name: "",
+        address: ""
+      };
+    }
+
+    if (ownerId && isNew) {
+      entity.sellerId = ownerId;
+    }
 
     dialogConfig.data = {
+      isNew,
       entity
     };
 

@@ -2,19 +2,20 @@
 
   <mat-form-field>
 
-    <input matInput placeholder="Name" formControlName="name">
+    <input matInput placeholder="name" formControlName="name">
 
   </mat-form-field>
 
   <mat-form-field>
 
-    <input matInput placeholder="Address" formControlName="address">
+    <input matInput placeholder="address" formControlName="address">
 
   </mat-form-field>
-  <div *ngIf="hasOwnerField">
+
+  <div *ngIf="hasSellerIdField">
     <mat-form-field>
 
-      <input matInput placeholder="OwnerId" formControlName="ownerId">
+      <input matInput placeholder="sellerId" formControlName="sellerId">
 
     </mat-form-field>
   </div>

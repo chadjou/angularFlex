@@ -12,23 +12,27 @@ import { Terminal } from "../../models/terminal";
 })
 export class AddDialogComponent implements OnInit {
   form: FormGroup;
-  hasOwnerField: boolean;
+  hasSellerIdField: boolean;
+  testEntity;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) { entity }
+    @Inject(MAT_DIALOG_DATA) { entity, isNew }
   ) {
     if (entity.hasOwnProperty("sellerId")) {
-      this.hasOwnerField = true;
+      this.hasSellerIdField = true;
+      this.form = fb.group({
+        name: [entity.name],
+        address: [entity.address],
+        sellerId: [entity.sellerId]
+      });
     } else {
-      this.hasOwnerField = false;
+      this.hasSellerIdField = false;
+      this.form = fb.group({
+        name: [entity.name],
+        address: [entity.address]
+      });
     }
-
-    this.form = fb.group({
-      name: [entity.name],
-      address: [entity.address],
-      ownerId: [entity.SellerId]
-    });
   }
 
   ngOnInit() {}
