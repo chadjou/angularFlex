@@ -13,6 +13,8 @@ export class GetValuesService {
   deleteSellerUrl = "https://localhost:44358/api/deleteseller2";
   updateSellerUrl = "https://localhost:44358/api/updateseller2";
 
+  addTerminalUrl = "https://localhost:44358/api/terminal";
+
   testbody = { name: "test2" };
 
   getConfig() {
@@ -36,5 +38,13 @@ export class GetValuesService {
 
   updateSeller(qq: any): Observable<Object> {
     return this.http.put(this.updateSellerUrl, qq);
+  }
+
+  addNewTerminal(qq: any): Observable<Object> {
+    return this.http.post(this.addTerminalUrl, qq);
+  }
+
+  updateTerminal(qq: any): Observable<Object> {
+    return this.http.put(this.addTerminalUrl, qq);
   }
 }

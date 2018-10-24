@@ -51,9 +51,6 @@ export class AppComponent {
 
     if (!entity) {
       isNew = true;
-    }
-
-    if (isNew) {
       entity = {
         id: null,
         name: "",
@@ -76,14 +73,26 @@ export class AppComponent {
       console.log("Dialog output:", val);
       this.ss = val;
       console.log(this.ss);
-      if (!name) {
-        this.getValuesService
-          .postSeller2(val)
-          .subscribe(data => console.log(data));
+      if (ownerId) {
+        if (isNew) {
+          this.getValuesService
+            .addNewTerminal(val)
+            .subscribe(data => console.log(data));
+        } else {
+          this.getValuesService
+            .updateTerminal(val)
+            .subscribe(data => console.log(data));
+        }
       } else {
-        this.getValuesService
-          .updateSeller(val)
-          .subscribe(data => console.log(data));
+        if (isNew) {
+          this.getValuesService
+            .postSeller2(val)
+            .subscribe(data => console.log(data));
+        } else {
+          this.getValuesService
+            .updateSeller(val)
+            .subscribe(data => console.log(data));
+        }
       }
     });
   }
@@ -114,7 +123,6 @@ export class AppComponent {
   }
 
   onClickMe5() {
-   
     console.log(this.sellers);
   }
 
