@@ -7,11 +7,7 @@ import { Seller } from "./models/seller";
 
 import { Terminal } from "./models/terminal";
 import { Observable } from "rxjs";
-
-enum entityTypeEnum {
-  Seller,
-  Terminal
-}
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-root",
@@ -24,7 +20,8 @@ export class AppComponent {
   ss: any;
   constructor(
     private getValuesService: GetValuesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
   ) {}
   title = "angularFlex";
 
@@ -107,6 +104,7 @@ export class AppComponent {
     const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(val => {
+      this.spinner.show();
       console.log("Dialog output:", val);
       this.ss = val;
       console.log(this.ss);
@@ -122,9 +120,10 @@ export class AppComponent {
         }
       } else {
         if (isNew) {
-          this.getValuesService
-            .postSeller2(val)
-            .subscribe(data => console.log(data));
+          this.getValuesService.postSeller2(val).subscribe(data => {
+            console.log(data);
+            this.spinner.hide();
+          });
         } else {
           this.getValuesService
             .updateSeller(val)

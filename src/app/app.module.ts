@@ -25,6 +25,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { HttpClientModule } from "@angular/common/http";
 import { AddDialogComponent } from "./addDialog/add-dialog/add-dialog.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent, AddDialogComponent],
@@ -49,7 +50,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatProgressSpinnerModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatMenuModule
+    MatMenuModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
