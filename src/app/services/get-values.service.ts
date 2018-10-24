@@ -15,6 +15,8 @@ export class GetValuesService {
 
   addTerminalUrl = "https://localhost:44358/api/terminal";
 
+  deleteTerminalUrl = "https://localhost:44358/api/deleteterminal";
+
   testbody = { name: "test2" };
 
   getConfig() {
@@ -46,5 +48,9 @@ export class GetValuesService {
 
   updateTerminal(qq: any): Observable<Object> {
     return this.http.put(this.addTerminalUrl, qq);
+  }
+
+  deleteTerminal(id: any): Observable<Object> {
+    return this.http.request("delete", this.deleteTerminalUrl, { body: id });
   }
 }

@@ -6,6 +6,7 @@ import { AddDialogComponent } from "./addDialog/add-dialog/add-dialog.component"
 import { Seller } from "./models/seller";
 
 import { Terminal } from "./models/terminal";
+import { Observable } from "rxjs";
 
 enum entityTypeEnum {
   Seller,
@@ -40,6 +41,42 @@ export class AppComponent {
     address: "testAddress"
     //sellerId: null
   };
+
+  async removeSeller(entity: any) {
+    var qq: any;
+    qq = await this.entityAction(entity);
+  }
+
+  async entityAction(entity?: any, ownerId?: number): Promise<any> {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    var isNew = false;
+    var result: any;
+
+    dialogConfig.data = {
+      isNew,
+      entity
+    };
+
+    const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
+    /*
+    var qqq = await dialogRef.afterClosed().subscribe(val => {
+      return val;
+    });
+    */
+
+    var qqq = await dialogRef
+      .afterClosed()
+      .toPromise()
+      .then(val => {
+        return val;
+      });
+    console.log("BLYAT");
+    return qqq;
+  }
+
+  /////////////
 
   //entity?: Seller | Terminal,
   editCourse(entity?: any, ownerId?: number) {
@@ -128,6 +165,12 @@ export class AppComponent {
 
   deleteSeller(id: any) {
     this.getValuesService.deleteSeller(id).subscribe(hero => console.log(hero));
+  }
+
+  deleteTerminal(id: any) {
+    this.getValuesService
+      .deleteTerminal(id)
+      .subscribe(hero => console.log(hero));
   }
 
   onClickMe4() {
