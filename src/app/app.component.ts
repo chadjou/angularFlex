@@ -40,9 +40,11 @@ export class AppComponent {
   };
 
   getSellersList() {
-    this.getValuesService
-      .getSellers()
-      .subscribe((data: any) => (this.sellers = data));
+    this.spinner.show();
+    this.getValuesService.getSellers().subscribe((data: any) => {
+      this.sellers = data;
+      this.spinner.hide();
+    });
   }
 
   onClickMe() {

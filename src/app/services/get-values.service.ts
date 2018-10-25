@@ -7,7 +7,7 @@ import { RequestOptions, Request, RequestMethod } from "@angular/http";
 })
 export class GetValuesService {
   constructor(private http: HttpClient) {}
-  configUrl = "https://localhost:44358/api/values";
+  testValuesUrl = "https://localhost:44358/api/values";
   sellersUrl = "https://localhost:44358/api/Sellers";
   postSellerUrl = "https://localhost:44358/api/seller";
   deleteSellerUrl = "https://localhost:44358/api/deleteseller2";
@@ -19,8 +19,8 @@ export class GetValuesService {
 
   testbody = { name: "test2" };
 
-  getConfig() {
-    return this.http.get(this.configUrl);
+  getTestValues() {
+    return this.http.get(this.testValuesUrl);
   }
 
   getSellers() {

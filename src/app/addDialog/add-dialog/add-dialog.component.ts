@@ -13,8 +13,6 @@ import { Terminal } from "../../models/terminal";
 export class AddDialogComponent implements OnInit {
   form: FormGroup;
   hasSellerIdField: boolean;
-  testEntity;
-  entity2: { Name: string };
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddDialogComponent>,
