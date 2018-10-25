@@ -32,13 +32,6 @@ export class AppComponent {
   newSeller: Seller;
   newTerminal: Terminal;
 
-  testEntity = {
-    id: 0,
-    name: "testName",
-    address: "testAddress"
-    //sellerId: null
-  };
-
   getSellersList() {
     this.spinner.show();
     this.getValuesService.getSellers().subscribe((data: any) => {
@@ -61,7 +54,6 @@ export class AppComponent {
 
     this.spinner.show();
     this.getValuesService.postSeller2(actionResult).subscribe(data => {
-      console.log(data);
       this.spinner.hide();
     });
   }
@@ -71,7 +63,6 @@ export class AppComponent {
 
     this.spinner.show();
     this.getValuesService.updateSeller(actionResult).subscribe(data => {
-      console.log(data);
       this.spinner.hide();
     });
   }
@@ -88,7 +79,6 @@ export class AppComponent {
 
     this.spinner.show();
     this.getValuesService.addNewTerminal(actionResult).subscribe(data => {
-      console.log(data);
       this.spinner.hide();
     });
   }
@@ -98,7 +88,6 @@ export class AppComponent {
 
     this.spinner.show();
     this.getValuesService.updateTerminal(actionResult).subscribe(data => {
-      console.log(data);
       this.spinner.hide();
     });
   }
