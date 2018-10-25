@@ -39,106 +39,6 @@ export class AppComponent {
     //sellerId: null
   };
 
-  async removeSeller(entity: any) {
-    var qq: any;
-    qq = await this.entityAction(entity);
-  }
-
-  async entityAction(entity?: any, ownerId?: number): Promise<any> {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    var isNew = false;
-    var result: any;
-
-    dialogConfig.data = {
-      isNew,
-      entity
-    };
-
-    const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
-    /*
-    var qqq = await dialogRef.afterClosed().subscribe(val => {
-      return val;
-    });
-    */
-
-    var qqq = await dialogRef
-      .afterClosed()
-      .toPromise()
-      .then(val => {
-        return val;
-      });
-    console.log("BLYAT");
-    return qqq;
-  }
-
-  /////////////
-
-  //entity?: Seller | Terminal,
-  editCourse(entity?: any, ownerId?: number) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    var isNew = false;
-
-    if (!entity) {
-      isNew = true;
-      entity = {
-        id: null,
-        name: "",
-        address: ""
-      };
-    }
-
-    if (ownerId && isNew) {
-      entity.sellerId = ownerId;
-    }
-
-    dialogConfig.data = {
-      isNew,
-      entity
-    };
-
-    const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(val => {
-      this.spinner.show();
-      console.log("Dialog output:", val);
-      this.ss = val;
-      console.log(this.ss);
-      if (ownerId) {
-        if (isNew) {
-          this.getValuesService
-            .addNewTerminal(val)
-            .subscribe(data => console.log(data));
-        } else {
-          this.getValuesService
-            .updateTerminal(val)
-            .subscribe(data => console.log(data));
-        }
-      } else {
-        if (isNew) {
-          this.getValuesService.postSeller2(val).subscribe(data => {
-            console.log(data);
-            this.spinner.hide();
-          });
-        } else {
-          this.getValuesService
-            .updateSeller(val)
-            .subscribe(data => console.log(data));
-        }
-      }
-    });
-  }
-
-  showConfig_v1() {
-    this.getValuesService
-      .getConfig()
-      .subscribe((data: string[]) => (this.config = data));
-  }
-
   getSellersList() {
     this.getValuesService
       .getSellers()
@@ -146,35 +46,97 @@ export class AppComponent {
   }
 
   onClickMe() {
-    this.showConfig_v1();
     this.getSellersList();
   }
 
-  onClickMe2() {
-    console.log(this.config);
-    console.log(this.sellers);
-  }
-  onClickMe3() {
-    this.getValuesService.postSeller().subscribe(hero => console.log(hero));
+  async addSeler() {
+    let entity = {
+      Id: 0,
+      Name: "",
+      Address: ""
+    };
+    let actionResult: any = await this.entityAction(entity);
+
+    this.spinner.show();
+    this.getValuesService.postSeller2(actionResult).subscribe(data => {
+      console.log(data);
+      this.spinner.hide();
+    });
   }
 
-  onClickMe5() {
-    console.log(this.sellers);
+  async updateSeller(entity: any) {
+    let actionResult: any = await this.entityAction(entity);
+
+    this.spinner.show();
+    this.getValuesService.updateSeller(actionResult).subscribe(data => {
+      console.log(data);
+      this.spinner.hide();
+    });
+  }
+
+  async addTerminal(sellerId: any) {
+    let entity = {
+      Id: null,
+      Name: "",
+      Address: "",
+      SellerId: sellerId
+    };
+
+    let actionResult: any = await this.entityAction(entity);
+
+    this.spinner.show();
+    this.getValuesService.addNewTerminal(actionResult).subscribe(data => {
+      console.log(data);
+      this.spinner.hide();
+    });
+  }
+
+  async updateTerminal(entity: any) {
+    let actionResult: any = await this.entityAction(entity);
+
+    this.spinner.show();
+    this.getValuesService.updateTerminal(actionResult).subscribe(data => {
+      console.log(data);
+      this.spinner.hide();
+    });
+  }
+
+  async entityAction(entity: any): Promise<any> {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      entity
+    };
+
+    const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
+
+    let qqq = await dialogRef
+      .afterClosed()
+      .toPromise()
+      .then(val => {
+        return val;
+      });
+    return qqq;
   }
 
   deleteSeller(id: any) {
-    this.getValuesService.deleteSeller(id).subscribe(hero => console.log(hero));
+    this.spinner.show();
+    this.getValuesService.deleteSeller(id).subscribe(hero => {
+      console.log(hero);
+      this.spinner.hide();
+    });
   }
 
   deleteTerminal(id: any) {
-    this.getValuesService
-      .deleteTerminal(id)
-      .subscribe(hero => console.log(hero));
+    this.spinner.show();
+    this.getValuesService.deleteTerminal(id).subscribe(hero => {
+      console.log(hero);
+      this.spinner.hide();
+    });
   }
 
-  onClickMe4() {
-    console.log("CLICK!");
-  }
   toggleBackground() {
     this.background = this.background ? "" : "primary";
   }

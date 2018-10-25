@@ -18,11 +18,12 @@ export class AddDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) { entity, isNew }
+    @Inject(MAT_DIALOG_DATA) { entity }
   ) {
     if (entity.hasOwnProperty("sellerId")) {
       this.hasSellerIdField = true;
       this.form = fb.group({
+        Id: [entity.Id],
         name: [entity.Name],
         address: [entity.Address],
         sellerId: [entity.sellerId]
@@ -30,6 +31,7 @@ export class AddDialogComponent implements OnInit {
     } else {
       this.hasSellerIdField = false;
       this.form = fb.group({
+        Id: [entity.Id],
         name: [entity.Name],
         address: [entity.Address]
       });

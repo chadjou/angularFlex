@@ -27,9 +27,6 @@ export class GetValuesService {
     return this.http.get(this.sellersUrl);
   }
 
-  postSeller(): Observable<Object> {
-    return this.http.post(this.postSellerUrl, this.testbody);
-  }
   postSeller2(qq: any): Observable<Object> {
     return this.http.post(this.postSellerUrl, qq);
   }
