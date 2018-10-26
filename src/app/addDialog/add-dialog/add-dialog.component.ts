@@ -18,20 +18,20 @@ export class AddDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) { entity }
   ) {
-    if (entity.hasOwnProperty("sellerId")) {
+    if (entity.hasOwnProperty("SellerId")) {
       this.hasSellerIdField = true;
       this.form = fb.group({
         Id: [entity.Id],
-        name: [entity.Name],
-        address: [entity.Address],
-        sellerId: [entity.sellerId]
+        Name: [entity.Name],
+        Address: [entity.Address],
+        SellerId: [entity.SellerId]
       });
     } else {
       this.hasSellerIdField = false;
       this.form = fb.group({
         Id: [entity.Id],
-        name: [entity.Name],
-        address: [entity.Address]
+        Name: [entity.Name],
+        Address: [entity.Address]
       });
     }
   }

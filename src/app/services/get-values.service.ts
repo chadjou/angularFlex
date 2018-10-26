@@ -7,15 +7,15 @@ import { RequestOptions, Request, RequestMethod } from "@angular/http";
 })
 export class GetValuesService {
   constructor(private http: HttpClient) {}
+  serverUrl = "https://localhost:44358/api";
+  sellerUrl = this.serverUrl + "/seller";
+  terminalUrl = this.serverUrl + "/terminal";
+
   testValuesUrl = "https://localhost:44358/api/values";
-  sellersUrl = "https://localhost:44358/api/Sellers";
-  postSellerUrl = "https://localhost:44358/api/seller";
-  deleteSellerUrl = "https://localhost:44358/api/deleteseller2";
-  updateSellerUrl = "https://localhost:44358/api/updateseller2";
 
-  addTerminalUrl = "https://localhost:44358/api/terminal";
+  postValuesUrl = "https://localhost:44358/api/seller2";
 
-  deleteTerminalUrl = "https://localhost:44358/api/deleteterminal";
+  testAddNewTerminal = "https://localhost:44358/api/testseller";
 
   testbody = { name: "test2" };
 
@@ -24,30 +24,30 @@ export class GetValuesService {
   }
 
   getSellers() {
-    return this.http.get(this.sellersUrl);
+    return this.http.get(this.sellerUrl);
   }
 
-  postSeller2(qq: any): Observable<Object> {
-    return this.http.post(this.postSellerUrl, qq);
-  }
-
-  deleteSeller(id: any): Observable<Object> {
-    return this.http.request("delete", this.deleteSellerUrl, { body: id });
-  }
-
-  updateSeller(qq: any): Observable<Object> {
-    return this.http.put(this.updateSellerUrl, qq);
-  }
-
-  addNewTerminal(qq: any): Observable<Object> {
-    return this.http.post(this.addTerminalUrl, qq);
+  addSeller(qq: any): Observable<Object> {
+    return this.http.post(this.sellerUrl, qq);
   }
 
   updateTerminal(qq: any): Observable<Object> {
-    return this.http.put(this.addTerminalUrl, qq);
+    return this.http.put(this.terminalUrl, qq);
+  }
+
+  addNewTerminal(qq: any): Observable<Object> {
+    return this.http.post(this.terminalUrl, qq);
+  }
+
+  deleteSeller(id: any): Observable<Object> {
+    return this.http.request("delete", this.sellerUrl, { body: id });
+  }
+
+  updateSeller(qq: any): Observable<Object> {
+    return this.http.put(this.sellerUrl, qq);
   }
 
   deleteTerminal(id: any): Observable<Object> {
-    return this.http.request("delete", this.deleteTerminalUrl, { body: id });
+    return this.http.request("delete", this.terminalUrl, { body: id });
   }
 }

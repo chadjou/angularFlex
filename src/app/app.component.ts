@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { GetValuesService } from "./services/get-values.service";
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
@@ -14,7 +14,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   config: string[];
   sellers: any;
   ss: any;
@@ -35,6 +35,9 @@ export class AppComponent {
   getSellersList() {
     this.spinner.show();
     this.getValuesService.getSellers().subscribe((data: any) => {
+      data.sort(function(a, b) {
+        return b.Id - a.Id;
+      });
       this.sellers = data;
       this.spinner.hide();
     });
@@ -53,8 +56,9 @@ export class AppComponent {
     let actionResult: any = await this.entityAction(entity);
 
     this.spinner.show();
-    this.getValuesService.postSeller2(actionResult).subscribe(data => {
+    this.getValuesService.addSeller(actionResult).subscribe(data => {
       this.spinner.hide();
+      this.getSellersList();
     });
   }
 
@@ -64,21 +68,23 @@ export class AppComponent {
     this.spinner.show();
     this.getValuesService.updateSeller(actionResult).subscribe(data => {
       this.spinner.hide();
+      this.getSellersList();
     });
   }
 
-  async addTerminal(sellerId: any) {
+  async addTerminal(SellerId: any) {
     let entity = {
-      Id: null,
+      Id: 0,
       Name: "",
       Address: "",
-      SellerId: sellerId
+      SellerId: SellerId
     };
 
     let actionResult: any = await this.entityAction(entity);
 
     this.spinner.show();
     this.getValuesService.addNewTerminal(actionResult).subscribe(data => {
+      this.getSellersList();
       this.spinner.hide();
     });
   }
@@ -89,6 +95,7 @@ export class AppComponent {
     this.spinner.show();
     this.getValuesService.updateTerminal(actionResult).subscribe(data => {
       this.spinner.hide();
+      this.getSellersList();
     });
   }
 
@@ -117,6 +124,7 @@ export class AppComponent {
     this.getValuesService.deleteSeller(id).subscribe(hero => {
       console.log(hero);
       this.spinner.hide();
+      this.getSellersList();
     });
   }
 
@@ -125,10 +133,15 @@ export class AppComponent {
     this.getValuesService.deleteTerminal(id).subscribe(hero => {
       console.log(hero);
       this.spinner.hide();
+      this.getSellersList();
     });
   }
 
   toggleBackground() {
     this.background = this.background ? "" : "primary";
+  }
+
+  ngOnInit() {
+    this.getSellersList();
   }
 }
