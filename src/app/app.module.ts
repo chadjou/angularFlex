@@ -26,9 +26,11 @@ import { HttpClientModule } from "@angular/common/http";
 import { AddDialogComponent } from "./addDialog/add-dialog/add-dialog.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { SellerLabelComponent } from "./shared/seller-label/seller-label.component";
+import { TerminalLabelComponent } from './shared/terminal-label/terminal-label.component';
 
 @NgModule({
-  declarations: [AppComponent, AddDialogComponent],
+  declarations: [AppComponent, AddDialogComponent, SellerLabelComponent, TerminalLabelComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
