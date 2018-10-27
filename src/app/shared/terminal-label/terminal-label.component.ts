@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-terminal-label",
@@ -10,6 +10,18 @@ export class TerminalLabelComponent implements OnInit {
   terminal: any;
   @Input()
   seller: any;
+  @Input()
+  public myCallback: Function;
+  @Output()
+  public onComplete: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public updateTerminal: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public deleteTerminal: EventEmitter<any> = new EventEmitter();
+
+  runOnComplete(): void {
+    this.onComplete.emit("qq");
+  }
 
   constructor() {}
 

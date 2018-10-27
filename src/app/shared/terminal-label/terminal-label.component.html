@@ -3,11 +3,11 @@
     <path d="M40 8H8c-2.21 0-3.98 1.79-3.98 4L4 36c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm0 28H8V24h32v12zm0-20H8v-4h32v4z" /></svg>
   <h2 class="mat-h2">{{terminal.Name}}</h2>
   <div class="labelicons">
-    <svg class="pointer" (click)="updateTerminal(terminal, seller.Id)" xmlns="http://www.w3.org/2000/svg" width="48"
-      height="48" viewBox="0 0 48 48">
-      <path d="M6 34.5V42h7.5l22.13-22.13-7.5-7.5L6 34.5zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z" /></svg>
-    <svg class="pointer" (click)="deleteTerminal(terminal.Id)" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+    <svg class="pointer" (click)="updateTerminal.emit(terminal)" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
       viewBox="0 0 48 48">
+      <path d="M6 34.5V42h7.5l22.13-22.13-7.5-7.5L6 34.5zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z" /></svg>
+    <svg class="pointer" (click)="deleteTerminal.emit(terminal.Id)" xmlns="http://www.w3.org/2000/svg" width="48"
+      height="48" viewBox="0 0 48 48">
       <path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" /></svg>
   </div>
 </div>

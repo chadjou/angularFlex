@@ -46,6 +46,10 @@ export class AppComponent implements OnInit {
     this.getSellersList();
   }
 
+  testFunc(qq: any) {
+    console.log(qq);
+  }
+
   async addSeler() {
     let entity = {
       Id: 0,
