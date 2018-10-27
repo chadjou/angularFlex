@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { RequestOptions, Request, RequestMethod } from "@angular/http";
+
 @Injectable({
   providedIn: "root"
 })
@@ -14,10 +14,6 @@ export class GetValuesService {
   testValuesUrl = "https://localhost:44358/api/values";
 
   postValuesUrl = "https://localhost:44358/api/seller2";
-
-  testAddNewTerminal = "https://localhost:44358/api/testseller";
-
-  testbody = { name: "test2" };
 
   getTestValues() {
     return this.http.get(this.testValuesUrl);

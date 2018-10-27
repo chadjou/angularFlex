@@ -15,9 +15,8 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  config: string[];
   sellers: any;
-  ss: any;
+
   constructor(
     private getValuesService: GetValuesService,
     private dialog: MatDialog,
@@ -54,7 +53,6 @@ export class AppComponent implements OnInit {
       Address: ""
     };
     let actionResult: any = await this.entityAction(entity);
-
     this.spinner.show();
     this.getValuesService.addSeller(actionResult).subscribe(data => {
       this.spinner.hide();
@@ -64,7 +62,6 @@ export class AppComponent implements OnInit {
 
   async updateSeller(entity: any) {
     let actionResult: any = await this.entityAction(entity);
-
     this.spinner.show();
     this.getValuesService.updateSeller(actionResult).subscribe(data => {
       this.spinner.hide();
@@ -81,7 +78,6 @@ export class AppComponent implements OnInit {
     };
 
     let actionResult: any = await this.entityAction(entity);
-
     this.spinner.show();
     this.getValuesService.addNewTerminal(actionResult).subscribe(data => {
       this.getSellersList();
@@ -110,19 +106,18 @@ export class AppComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddDialogComponent, dialogConfig);
 
-    let qqq = await dialogRef
+    let dialogResult = await dialogRef
       .afterClosed()
       .toPromise()
       .then(val => {
         return val;
       });
-    return qqq;
+    return dialogResult;
   }
 
   deleteSeller(id: any) {
     this.spinner.show();
     this.getValuesService.deleteSeller(id).subscribe(hero => {
-      console.log(hero);
       this.spinner.hide();
       this.getSellersList();
     });
@@ -131,7 +126,6 @@ export class AppComponent implements OnInit {
   deleteTerminal(id: any) {
     this.spinner.show();
     this.getValuesService.deleteTerminal(id).subscribe(hero => {
-      console.log(hero);
       this.spinner.hide();
       this.getSellersList();
     });
