@@ -39,10 +39,10 @@ export class AddDialogComponent implements OnInit {
   ngOnInit() {}
 
   save() {
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close({ isSaved: true, value: this.form.value });
   }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close({ isSaved: false });
   }
 }

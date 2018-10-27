@@ -57,8 +57,11 @@ export class AppComponent implements OnInit {
       Address: ""
     };
     let actionResult: any = await this.entityAction(entity);
+    if (actionResult.isSaved == false) {
+      return;
+    }
     this.spinner.show();
-    this.getValuesService.addSeller(actionResult).subscribe(data => {
+    this.getValuesService.addSeller(actionResult.value).subscribe(data => {
       this.spinner.hide();
       this.getSellersList();
     });
@@ -66,8 +69,11 @@ export class AppComponent implements OnInit {
 
   async updateSeller(entity: any) {
     let actionResult: any = await this.entityAction(entity);
+    if (actionResult.isSaved == false) {
+      return;
+    }
     this.spinner.show();
-    this.getValuesService.updateSeller(actionResult).subscribe(data => {
+    this.getValuesService.updateSeller(actionResult.value).subscribe(data => {
       this.spinner.hide();
       this.getSellersList();
     });
@@ -82,8 +88,11 @@ export class AppComponent implements OnInit {
     };
 
     let actionResult: any = await this.entityAction(entity);
+    if (actionResult.isSaved == false) {
+      return;
+    }
     this.spinner.show();
-    this.getValuesService.addNewTerminal(actionResult).subscribe(data => {
+    this.getValuesService.addNewTerminal(actionResult.value).subscribe(data => {
       this.getSellersList();
       this.spinner.hide();
     });
@@ -91,9 +100,11 @@ export class AppComponent implements OnInit {
 
   async updateTerminal(entity: any) {
     let actionResult: any = await this.entityAction(entity);
-
+    if (actionResult.isSaved == false) {
+      return;
+    }
     this.spinner.show();
-    this.getValuesService.updateTerminal(actionResult).subscribe(data => {
+    this.getValuesService.updateTerminal(actionResult.value).subscribe(data => {
       this.spinner.hide();
       this.getSellersList();
     });
